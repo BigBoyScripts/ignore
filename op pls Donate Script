@@ -1,34 +1,29 @@
-
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "ECSWarningGUI"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 400, 0, 220)
-frame.Position = UDim2.new(0.5, -200, 0.5, -110)
+frame.Size = UDim2.new(0, 400, 0, 260)
+frame.Position = UDim2.new(0.5, -200, 0.5, -130)
 frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 frame.BorderSizePixel = 0
 frame.Parent = screenGui
-
 
 local corner = Instance.new("UICorner")
 corner.CornerRadius = UDim.new(0, 15)
 corner.Parent = frame
 
-
 local title = Instance.new("TextLabel")
 title.Size = UDim2.new(1, 0, 0, 50)
 title.Position = UDim2.new(0, 0, 0, 0)
 title.BackgroundTransparency = 1
-title.Text = "You Dont Have Vip Access ❌️"
+title.Text = "You Don't Have VIP Access ❌️"
 title.TextColor3 = Color3.new(1, 0.2, 0.2)
 title.TextSize = 20
 title.Font = Enum.Font.GothamBlack
 title.TextWrapped = true
 title.Parent = frame
-
 
 local desc = Instance.new("TextLabel")
 desc.Size = UDim2.new(1, -20, 0, 150)
@@ -38,7 +33,27 @@ desc.TextColor3 = Color3.new(1, 1, 1)
 desc.TextSize = 16
 desc.TextWrapped = true
 desc.Font = Enum.Font.GothamBlack
-desc.Text = "To Have Access To Vip Features ( Working ), you must:\n1. Join the group: we love purecuteboy\n2. Go to the Store and buy the 5 Robux shirt\n3. Follow the owner of the group\n\nAfter this, you'll get full access ✅️"
+desc.Text = "To Have Access To VIP Features (Working), you must:\n1. Join the group: we love purecuteboy\n2. Go to the Store and buy the 5 Robux shirt\n3. Follow the owner of the group\n\nAfter this, you'll get full access ✅️"
 desc.TextXAlignment = Enum.TextXAlignment.Left
 desc.TextYAlignment = Enum.TextYAlignment.Top
 desc.Parent = frame
+
+
+local countdownLabel = Instance.new("TextLabel")
+countdownLabel.Size = UDim2.new(1, 0, 0, 30)
+countdownLabel.Position = UDim2.new(0, 0, 1, -35)
+countdownLabel.BackgroundTransparency = 1
+countdownLabel.TextColor3 = Color3.new(1, 1, 1)
+countdownLabel.TextSize = 16
+countdownLabel.Font = Enum.Font.GothamBlack
+countdownLabel.Text = "Normal script will load in 10 seconds..."
+countdownLabel.TextWrapped = true
+countdownLabel.Parent = frame
+
+
+task.spawn(function()
+	for i = 10, 1, -1 do
+		countdownLabel.Text = "Normal script will load in " .. i .. " second" .. (i > 1 and "s" or "") .. "..."
+		task.wait(1)
+	end
+end)
